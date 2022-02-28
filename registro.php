@@ -12,11 +12,13 @@
 	/*Con el require_once haremos uso del archivo Config.php donde guardamos en constantes los datos requeridos para conectarnos a la BD.*/
 
 	require_once "Config.php";
+	//include "Database.php";
 
 	/*La función spl_autoload_register permite cargar o llamar automáticamente una función que le pasemos, es decir es un "autoloader", dentro pasaremos un "require_once" con un parametro $clase, el truco es que, cuando instanciemos una clase que no esta en nuestro archivo, esa variable tomara el nombre de la clase, en el caso más abajo será "Database", así si en un futuro tenemos muchas clases en distintos archivos, no tendremos que hacer un "require" o un "include" por cada una.*/
 
 	spl_autoload_register(function($clase){
 		require_once "$clase.php";
+		//require_once "Database.php";
 	});
 
 	/*"extract" tomara los datos del Array que vienen el POST y los convertira en variables declarandolas usando como valor los "name" que tienen cada input de nuestro formulario, es decir, de lo extraido en POST saldran las variables $nombre y $hobby con los valores que hayamos introducido en el formulario.*/
