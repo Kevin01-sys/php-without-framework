@@ -31,7 +31,9 @@
 				<option value="4">4</option>
 			</select>
 			<br>
-
+ 			<div id="select2lista"></div> 
+ 			<div id="select3lista"></div> 
+  			<p>Name: <span id="userName"></span></p>  
 
 			<input type="text" id="sueldo">
 			<input type="text" id="primaria">
@@ -41,7 +43,8 @@
 </html>
 <script >
 	$(document).ready(function(){
-
+		 $('#lista1').val(1);
+		  recargarLista();
 		 $('#lista2').change(function(){
 		 	//console.log("Probando 5,6,7");
 		 	mostrarDatos();
@@ -55,6 +58,17 @@
 </script>
 
 <script >
+	function recargarLista(){
+		$.ajax({
+			type:"POST",
+			url:"datos.php",
+			data:"id_categoria=" + $('#lista1').val(), // OBTIENE EL APUNTADOR DE LA LISTA
+			//data:"id_categoria=" + $('#lista1').text(), // OBTIENE EL TEXTO DE LA LISTA 
+			success:function(r){
+				$('#select2lista').html(r);
+			}
+		});
+	}
 	function mostrarDatos(){
 		$.ajax({
 			type:"POST",
