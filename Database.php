@@ -29,7 +29,9 @@ class Database{
     /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
 
     public function ejecutar(){
-        $this->prep->execute();
+        //echo("Error al preparar la consulta. <a href='index.php'>Regresar</a>");
+        echo("@");
+        //$this->prep->execute();
     }
 
     /*Usaremos una función pública para acceder a la sentencia que es una variable encapsulada/protected desde afuera de la clase, ya que usaremos un método que posee.*/
@@ -47,7 +49,7 @@ class Database{
     /*Literalmente libera de memoria la consulta, es regla, de otra manera nos mandara error si intentamos otra consulta*/
     
     public function liberar(){
-        $this->prep->free_result();
+        echo("@");
     }
 
     /*El método "query" es directo de la instancia $db de la clase mysqli, nos permite hacer una consulta directa, la uso en este "validadDatos" para corroborar si el usuario ya existe, enviándole de parametros, la columna que queremos, de que tabla y bajo que condición, es un SELECT sencillo.*/
