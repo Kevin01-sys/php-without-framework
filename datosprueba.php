@@ -1,6 +1,15 @@
 <?php
 
+/*Con el require_once haremos uso del archivo Config.php donde guardamos en constantes los datos requeridos para conectarnos a la BD.*/
+require_once "config.php";
+require_once "database.php";
+
+
+
+//$db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+
 $conexion=mysqli_connect('localhost','root','1234','prueba');
+
 $id_categoria=$_POST['id_categoria'];
 $nivel=$_POST['nivel'];
 $data = array();
