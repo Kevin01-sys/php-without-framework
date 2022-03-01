@@ -4,11 +4,14 @@
 require_once "config.php";
 require_once "database.php";
 
-
-
 //$db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
-$conexion=mysqli_connect('localhost','root','1234','prueba');
+// mysqli, de manera procesal
+//$conexion=mysqli_connect('localhost','root','1234','prueba');
+// mysqli, de manera orientado a objetos
+//$conexion=new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+// PDO
+$conexion=new PDO("mysql:host=localhost;dbname=prueba",'root','1234');
 
 $id_categoria=$_POST['id_categoria'];
 $nivel=$_POST['nivel'];
@@ -19,21 +22,24 @@ $sql="SELECT *
 FROM t_mundo 
 WHERE id_continente='$id_categoria' AND id='$nivel'";
 
-//$sql="SELECT *
-//FROM t_mundo 
-//WHERE id_continente='1' AND id='1'";
+//$query=mysqli_query($conexion,$sql);
+$query=$conexion->query("SELECT *
+FROM t_mundo 
+WHERE id_continente='$id_categoria' AND id='$nivel'");	
 
-$query=mysqli_query($conexion,$sql);
-   if($query->num_rows > 0){
-        $userData = $query->fetch_assoc();
+$numerofilas=$query->rowCount();
+
+
+    //if($query->num_rows > 0){
+    if($numerofilas > 0){
+        $userData = $query->fetch(PDO::FETCH_ASSOC);
         $data['status'] = 'ok';
         $data['result'] = $userData;
     }else{
         $data['status'] = 'err';
         $data['result'] = '';
         }
-//echo $id_categoria.$nivel;
-//echo $query;
+
 
 //returns data as JSON format
 echo json_encode($data);
