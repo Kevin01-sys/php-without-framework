@@ -38,7 +38,7 @@
 		/*Ahora si no está registrado el nombre que le pasamos entonces haremos el registro; en la función "preparar" mandaremos la inserción de datos usando las variables que previamente "extract" extrajo de lo venido en el POST.*/
 
 			//$db->preparar("INSERT INTO usuarios VALUES (?,?,?)");
-			$db->preparar("INSERT INTO usuarios VALUES ('2','$nombre','$hobby')");
+			$db->preparar("INSERT INTO usuarios VALUES (NULL,'$nombre','$hobby')");
 			/*Ahora por regla usaremos el "ejecutar" y ya se habra logrado la inserción en la BD*/
 			$db->ejecutar();
 			echo("Te has registrado perfectamente.");
