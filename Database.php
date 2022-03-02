@@ -34,7 +34,18 @@ class Database{
             echo("Error al preparar la consulta. <a href='index.php'>Regresar</a>");
         } 
         else {
-            echo ("Sentencia preparada con éxito");
+            //echo ("Sentencia preparada con éxito");
+        }
+    }
+    /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
+
+    public function ejecutar(){
+        if($this->prep->execute()==True){
+            echo("Te has registrado perfectamente.");
+        } 
+        else 
+        {
+            echo("El registro ha fallado");
         }
     }
 
