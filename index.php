@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Llenar select a partir de otro con php y mysql</title>
+	<title>Select Multiple</title>
 	<script
 	src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -11,7 +11,7 @@
 	
 </head>
 <body>
-	<h2>Llenar un select a partir de otro select con jquery y php</h2>
+	<h2>Resultado a partir de 2 Select</h2>
 
 			<label>SELECT 1 (Categoria)</label>
 			<select id="lista1" name="lista1">
