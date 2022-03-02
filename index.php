@@ -71,10 +71,10 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 										type:"POST",
 										url:"editarUsuario.php",
 										dataType: "json",
-										data: {},
+										data: {'id':id},
 										success:function(data){
 											if(data.status == 'ok') {
-												//document.getElementById("test").value = "Holi";
+
 												$('#test').text(data.result);
 											} else 
 											{
@@ -88,7 +88,7 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 					<?php } ?>
 			    </tbody>
 			</table>
-			<div id="test">PROBANDO</div>
+			<div id="test">test	</div>
 	</div>
 		
 
