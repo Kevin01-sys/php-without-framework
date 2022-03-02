@@ -49,9 +49,21 @@ class Database{
         return $this->prep;
     }
 
+    /*El metodo resultado hara uso del metodo fetch que trae una fila de la busquedad que haya hecho en la base de datos, dado que solo trae una, haremos uso de un ciclo while despúes, para que muestre todos los registros.*/
+
+    public function resultado(){
+        return $this->prep->fetch(); 
+    }
+
     // método free_result() Libera la memoria de los resultados almacenados del gestor de sentencia dado
     public function liberar(){
         $this->prep->free_result();
+    }
+
+    //Al cerrar la consulta y despúes la "conexión" liberamos la memoria, es regla.
+    public function cerrar(){
+        $this->prep->close();
+        $this->db->close();
     }
 
 

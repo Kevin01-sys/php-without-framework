@@ -52,6 +52,37 @@
 		/*Aquí haremos uso de la consulta que estaba encapsulada en la clase, por que haremos uso del método "bind_result" que nos asigna cada registro que la consulta haya hecho a las variables que le suministremos (Se declaran dentro del mismo paso de parametros).*/
 
 			$db->prep()->bind_result($id,$nombre_BD,$hobby_BD);
+
+		/*Aquí crearemos la tabla a base del uso de "echo" con código HTML*/
+
+			echo '<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">Nombre</th>
+			      <th scope="col">Hobby</th>
+			    </tr>
+			  </thead>
+			  <tbody>';
+
+		/*Para mostrar en fila cada resultado encontrado en la BD, haremos uso del metodo "resultado" que recordemos tiene el "return $this->prep->fetch();" el metodo "fetch" de la consulta trae una fila de la tabla resultado de la consulta, usamos un while para que itere con cada registro encontrado, de no usarlo, entonces solo nos enviaria la primera fila de todo lo encontrado*/ 
+
+			  while($db->resultado()){
+			  	echo"
+			  	<tr>
+			      <td>$nombre_BD</td>
+			      <td>$hobby_BD</td>
+			    </tr>
+			    ";
+			  } 
+			 echo '</tbody>
+			</table>';
+		/*Liberamos la consulta*/
+
+			$db->liberar();
+
+		/*Y finalmente cerramos toda la conexión*/
+		
+			$db->cerrar();
 	}
 
 	
