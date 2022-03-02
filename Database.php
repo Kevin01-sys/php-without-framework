@@ -40,13 +40,18 @@ class Database{
     /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
 
     public function ejecutar(){
-        if($this->prep->execute()==True){
-            echo("Te has registrado perfectamente.");
-        } 
-        else 
-        {
-            echo("El registro ha fallado");
-        }
+        $this->prep->execute();
+    }
+
+    /*Usaremos una función pública para acceder a la sentencia que es una variable encapsulada/protected desde afuera de la clase, ya que usaremos un método que posee.*/
+
+    public function prep(){
+        return $this->prep;
+    }
+
+    // método free_result() Libera la memoria de los resultados almacenados del gestor de sentencia dado
+    public function liberar(){
+        $this->prep->free_result();
     }
 
 

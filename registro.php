@@ -41,6 +41,17 @@
 			$db->preparar("INSERT INTO usuarios VALUES ('2','$nombre','$hobby')");
 			/*Ahora por regla usaremos el "ejecutar" y ya se habra logrado la inserción en la BD*/
 			$db->ejecutar();
+			echo("Te has registrado perfectamente.");
+			/*Liberamos para que podamos hacer la siguiente consulta, es regla.*/
+			$db->liberar();
+		/*Ahora en vez de insertar haremos una selección de todos los datos y ejecutaremos*/
+
+			$db->preparar("SELECT * FROM usuarios");
+			$db->ejecutar();
+
+		/*Aquí haremos uso de la consulta que estaba encapsulada en la clase, por que haremos uso del método "bind_result" que nos asigna cada registro que la consulta haya hecho a las variables que le suministremos (Se declaran dentro del mismo paso de parametros).*/
+
+			$db->prep()->bind_result($id,$nombre_BD,$hobby_BD);
 	}
 
 	
