@@ -21,6 +21,7 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 			margin: 0 auto;
 		}
 	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="container">
@@ -47,6 +48,7 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 			<table class="table">
 			    <thead>
 				    <tr>
+				      <th scope="col">Id</th>
 				      <th scope="col">Nombre</th>
 				      <th scope="col">Hobby</th>
 				      <th scope="col">Eliminar</th>
@@ -55,9 +57,32 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 			    <tbody>
 			    	<?php while($db->resultado()){ ?>
 					  	<tr>
+					  	  <td><?php echo $id; ?></td>
 					      <td><?php echo $nombre_BD; ?></td>
 					      <td><?php echo $hobby_BD; ?></td>
-					      <td><button onclick="mostrarDatos()">Click me</button></td>
+					      <td><button onclick="mostrarDatos(<?php echo $id; ?>)<?php $id; ?>"><?php echo $id; ?></button></td>
+					    	<script >
+								function mostrarDatos<?php $id; ?>(id){
+									var id1 = id;
+									//var id = '<?=$id?>';
+									var nombre_BD = '<?=$nombre_BD?>';
+									console.log(id1);
+									$.ajax({
+										type:"POST",
+										url:"editarRegistro.php",
+										dataType: "json",
+										data: {},
+										success:function(data){
+											if(data.status == 'ok') {
+												document.getElementById("sueldo").value = data;
+											} else 
+											{
+												document.getElementById("sueldo").value = "Nivel y Categoria deben ser seleccionados" ;
+											}
+										}
+									});
+								}
+							</script>
 					    </tr>
 					<?php } ?>
 			    </tbody>
@@ -69,24 +94,5 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 	<script src="js/jquery-3.5.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
-	<script >
-		function mostrarDatos(){
-			console.log("Probando mostrarDatos");
-			$.ajax({
-				type:"POST",
-				url:"editarRegistro.php",
-				dataType: "json",
-				data: {},
-				success:function(data){
-					if(data.status == 'ok') {
-						document.getElementById("sueldo").value = data;
-					} else 
-					{
-						document.getElementById("sueldo").value = "Nivel y Categoria deben ser seleccionados" ;
-					}
-				}
-			});
-		}
-	</script>
 </body>
 </html>
