@@ -24,6 +24,20 @@ class Database{
         return $chequear; 
     }
 
+    /*En el metodo preparar, recibiremos la consulta como parametro y se la daremos al metodo "prepare" que la preparara; mandara false si el servidor tuvo problemas con la sentencia de consulta.*/
+
+    public function preparar($consulta){
+        $this->consulta= $consulta;
+        $this->prep= $this->db->prepare($this->consulta);
+        if(!$this->prep){
+            //echo ($this->prep);
+            echo("Error al preparar la consulta. <a href='index.php'>Regresar</a>");
+        } 
+        else {
+            echo ("Sentencia preparada con éxito");
+        }
+    }
+
 
 
 }

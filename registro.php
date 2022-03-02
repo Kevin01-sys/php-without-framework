@@ -21,7 +21,7 @@
 	});
 
 	/*"extract" tomara los datos del Array que vienen el POST y los convertira en variables declarandolas usando como valor los "name" que tienen cada input de nuestro formulario, es decir, de lo extraido en POST saldran las variables $nombre y $hobby con los valores que hayamos introducido en el formulario.*/
-	
+
 	extract($_POST, EXTR_OVERWRITE);
 
 	//Instanciamos la clase Database para hacer la conexión y las consultas.
@@ -34,7 +34,10 @@
 	if($validarUsuario>0){
 		echo "Usuario ya registrado, ingrese otros datos. <a href='index.php'>Regresar</a>";
 	}else{
-		echo "Usuario ingresado con éxito";
+		//echo "Usuario ingresado con éxito";
+		/*Ahora si no está registrado el nombre que le pasamos entonces haremos el registro; en la función "preparar" mandaremos la inserción de datos usando las variables que previamente "extract" extrajo de lo venido en el POST.*/
+
+			$db->preparar("INSERT INTO usuarios VALUES (?,?,?)");
 	}
 
 	
