@@ -1,3 +1,16 @@
+<?php
+require_once "Config.php";
+	spl_autoload_register(function($clase){
+		require_once "$clase.php";
+
+	});
+$db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+			$db->preparar("SELECT * FROM usuarios");
+			$db->ejecutar();
+			$db->prep()->bind_result($id,$nombre_BD,$hobby_BD); 
+//$nombre_BD="Hola";
+//$hobby_BD="Adios";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +42,25 @@
 				</form>
 			</div>	
 		</div>
+	</div>
+	<div>
+		<h1>Mostrar y editar datos:</h1>
+			<table class="table">
+			    <thead>
+				    <tr>
+				      <th scope="col">Nombre</th>
+				      <th scope="col">Hobby</th>
+				    </tr>
+			    </thead>
+			    <tbody>
+			    	<?php while($db->resultado()){ ?>
+					  	<tr>
+					      <td><?php echo $nombre_BD; ?></td>
+					      <td><?php echo $hobby_BD; ?></td>
+					    </tr>
+					<?php } ?>
+			    </tbody>
+			</table>
 	</div>
 		
 
