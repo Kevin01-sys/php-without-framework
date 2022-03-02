@@ -60,24 +60,25 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 					  	  <td><?php echo $id; ?></td>
 					      <td><?php echo $nombre_BD; ?></td>
 					      <td><?php echo $hobby_BD; ?></td>
-					      <td><button onclick="mostrarDatos(<?php echo $id; ?>)<?php $id; ?>"><?php echo $id; ?></button></td>
+					      <td><button onclick="mostrarDatos(<?php echo $id; ?>)">Eliminar</button></td>
 					    	<script >
-								function mostrarDatos<?php $id; ?>(id){
-									var id1 = id;
+								function mostrarDatos(id){
+									//var id1 = id;
 									//var id = '<?=$id?>';
-									var nombre_BD = '<?=$nombre_BD?>';
-									console.log(id1);
+									//var nombre_BD = '<?=$nombre_BD?>';
+									console.log(id);
 									$.ajax({
 										type:"POST",
-										url:"editarRegistro.php",
+										url:"editarUsuario.php",
 										dataType: "json",
 										data: {},
 										success:function(data){
 											if(data.status == 'ok') {
-												document.getElementById("sueldo").value = data;
+												//document.getElementById("test").value = "Holi";
+												$('#test').text(data.result);
 											} else 
 											{
-												document.getElementById("sueldo").value = "Nivel y Categoria deben ser seleccionados" ;
+												document.getElementById("test").value = "Nivel y Categoria deben ser seleccionados" ;
 											}
 										}
 									});
@@ -87,6 +88,7 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 					<?php } ?>
 			    </tbody>
 			</table>
+			<div id="test">PROBANDO</div>
 	</div>
 		
 
