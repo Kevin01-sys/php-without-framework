@@ -14,6 +14,7 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 	<title>Tutorial Conexión PHP BD puro</title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<style>
@@ -74,7 +75,7 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 										data: {'id':id},
 										success:function(data){
 											$('#test').html(data);
-												console.log(data.result[0]);
+												console.log(data);
 												//$('#test').value(data);
 												//$('#test').innerhtml(data);
 												//$('#test').load(data);
@@ -94,5 +95,13 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 	<script src="js/jquery-3.5.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
 </body>
 </html>
+    <script language="javascript" type="text/javascript">
+       $(document).ready(function () {
+          console.log("hi");
+       });
+    </script>
