@@ -66,20 +66,18 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 									//var id1 = id;
 									//var id = '<?=$id?>';
 									//var nombre_BD = '<?=$nombre_BD?>';
-									console.log(id);
+									//console.log(id);
 									$.ajax({
 										type:"POST",
 										url:"editarUsuario.php",
 										dataType: "json",
 										data: {'id':id},
 										success:function(data){
-											if(data.status == 'ok') {
-
-												$('#test').text(data.result);
-											} else 
-											{
-												document.getElementById("test").value = "Nivel y Categoria deben ser seleccionados" ;
-											}
+											$('#test').html(data);
+												console.log(data);
+												//$('#test').value(data);
+												//$('#test').innerhtml(data);
+												//$('#test').load(data);
 										}
 									});
 								}
