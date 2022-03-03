@@ -16,9 +16,17 @@
 			$i=1;
 			
 			while($db->resultado()){
+				 //$userData = $db->prep()->bind_result($id,$nombre_BD,$hobby_BD)
 				//echo $i++;
 				//echo $nombre_BD;
-					$data[$id] = $nombre_BD;
+					//$data['id'][] = $id;
+					//$data['nombre'][] = $nombre_BD;
+					//$data['hobby'][] = $Hobby_BD;
+					//$data['data']['id'][] = $id;
+					$data['data'][]  = ["id" => $id,"nombre" => $nombre_BD,"hobby" => $hobby_BD];
+					//$data['data']['nombre'][] = $nombre_BD;
+					//$data['data']['hobby'][] = $hobby_BD;
+					//$data['result'] = $userData;
 					//$data[$i] = $nombre_BD;
 				$i++;
 				}
@@ -29,7 +37,7 @@
 
 	 		/*echo '<table class="table">
 			  <thead>
-			    <tr>
+			    <tr>::
 			      <th scope="col">Nombre</th>
 			      <th scope="col">Hobby</th>
 			    </tr>

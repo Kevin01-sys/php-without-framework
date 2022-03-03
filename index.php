@@ -74,7 +74,7 @@ $db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 										data: {'id':id},
 										success:function(data){
 											$('#test').html(data);
-												console.log(data);
+												console.log(data.result[0]);
 												//$('#test').value(data);
 												//$('#test').innerhtml(data);
 												//$('#test').load(data);
