@@ -7,26 +7,15 @@ $id=13;
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-
-table.center {
-  margin-left: auto; 
-  margin-right: auto;
-}
-</style>
-	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 	<title>Tutorial Conexión PHP BD puro</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<style>
-		.col-centrar{
-			margin: 0 auto;
-		}
-	</style>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<!-- Css usado para dar estilo a la hoja -->
+	<link href="basic.css" rel="stylesheet" title="Default Style">
+	<!--Librerias para el uso del Datatable-->
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
+	<!-- Librerias para el uso de bootstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Librerias para los iconos de los botones -->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
 	<!-- Div en el que se podrá registrar usuarios -->
@@ -62,17 +51,20 @@ table.center {
 					      <th scope="col">Nombre</th>
 					      <th scope="col">Hobby</th>
 					      <th scope="col"></th>
-					      <td><button onclick="mostrarDatos(<?php echo $id; ?>)">Eliminar</button></td>
 					    </tr>
 				    </thead>
 				</table>
+				<input type="button" id="btn_listar" class="btn btn-primary" onclick="mostrarDatos(<?php echo $id; ?>)" value="Listar antiguo">
 				<div id="test">
 					<input type="button" id="btn_listar" class="btn btn-primary" value="listar">
+					<!--<button type="button" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button>
+					<button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>-->
 				</div>
+
 		</div>
 	</div>
-	<!-- Termino de div listar -->
 
+	<!-- Termino de div listar -->
 	<script src="js/jquery-3.5.1.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap.bundle.min.js"></script>
@@ -81,14 +73,18 @@ table.center {
 
 </body>
 </html>
-    <script language="javascript" type="text/javascript">
+    <script>
        $(document).ready(function(){
           console.log("Probando document ready");
           listar();
        });
+
+       //Al presionar el boton btn_listar, ocurrira la función listar()
        $("#btn_listar").on("click", function(){
        		listar();
        });
+
+       //La funcíón listar transforma el table "dt_cliente" en un Datatable y trae los datos del servidor 
     	var listar = function(){
     		var table = $("#dt_cliente").DataTable({
     			"destroy": true,
@@ -100,6 +96,7 @@ table.center {
     				{"data":"id"},
     				{"data":"nombre"},
     				{"data":"hobby"},
+    				{"defaultContent":'<button type="button" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button> <button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>'},
     			],
     			"language": idioma_espanol,
     		});
@@ -309,6 +306,7 @@ table.center {
     </script>
 
 					    	<script>
+					    		//Función para listar datos. Se reemplazo por el método listar, pero aun sirve para hacer pruebas.
 					    		var mostrarDatos = function(id){
 									//var id = '<?=$id?>';
 									$.ajax({
