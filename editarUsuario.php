@@ -23,6 +23,7 @@
 					//$data['nombre'][] = $nombre_BD;
 					//$data['hobby'][] = $Hobby_BD;
 					//$data['data']['id'][] = $id;
+					$data['status'] = 'ok';
 					$data['data'][]  = ["id" => $id,"nombre" => $nombre_BD,"hobby" => $hobby_BD];
 					//$data['data']['nombre'][] = $nombre_BD;
 					//$data['data']['hobby'][] = $hobby_BD;
@@ -31,32 +32,7 @@
 				$i++;
 				}
 
-			//$userData = $db->resultado()->fetch_assoc();
-			//$data['result'] = $db->resultado();
-
-
-	 		/*echo '<table class="table">
-			  <thead>
-			    <tr>::
-			      <th scope="col">Nombre</th>
-			      <th scope="col">Hobby</th>
-			    </tr>
-			  </thead>
-			  <tbody>';
-			  while($db->resultado()){
-			  	echo"
-			  	<tr>
-			      <td>$nombre_BD</td>
-			      <td>$hobby_BD</td>
-			    </tr>
-			    ";
-			  } 
-			 echo '</tbody>
-			</table>';*/
-
-
 	
-	$data['status'] = 'ok';
 
 			$db->liberar();
 			$db->cerrar();
