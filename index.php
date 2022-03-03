@@ -88,7 +88,7 @@ table.center {
     		var table = $("#dt_cliente").DataTable({
     			"ajax":{
     				"method":"POST",
-    				"url":"editarUsuario.php"
+    				"url":"listarUsuario.php"
     			},
     			"columns":[
     				{"data":"id"},
@@ -104,7 +104,7 @@ table.center {
 									//var id = '<?=$id?>';
 									$.ajax({
 										type:"POST",
-										url:"editarUsuario.php",
+										url:"listarUsuario.php",
 										dataType: "json",
 										data: {'id':id},
 										success:function(data){
