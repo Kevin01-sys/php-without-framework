@@ -16,6 +16,10 @@ $id=13;
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Librerias para los iconos de los botones -->
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Con el link rel y los 2 script es que se puede levantar el modal -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<!-- Div en el que se podrá registrar usuarios -->
@@ -34,6 +38,7 @@ $id=13;
 				    <input type="text" class="form-control" name="hobby" > 
 				  </div>
 				  <button type="submit" class="btn btn-primary">Enviar</button>
+				  <input type="button" id="btn_listar" class="btn btn-primary" value="Listar">
 				</form>
 			</div>	
 		</div>
@@ -54,9 +59,8 @@ $id=13;
 					    </tr>
 				    </thead>
 				</table>
-				<input type="button" id="btn_listar" class="btn btn-primary" onclick="mostrarDatos(<?php echo $id; ?>)" value="Listar antiguo">
+				<!--<input type="button" class="btn btn-primary" onclick="mostrarDatos(<?php echo $id; ?>)" value="Listar antiguo">-->
 				<div id="test">
-					<input type="button" id="btn_listar" class="btn btn-primary" value="listar">
 					<!--<button type="button" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button>
 					<button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>-->
 				</div>
@@ -64,15 +68,31 @@ $id=13;
 		</div>
 	</div>
 
-	<!-- Termino de div listar -->
-	<script src="js/jquery-3.5.1.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <!-- Modal Eliminar usuario -->
+  <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+    <div class="modal-dialog" role="document">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="modalEliminarLabel">Eliminar usuario</h4>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de eliminar al usuario?<strong data-name=""></strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <!-- Fin Modal Eliminar usuario -->
 
-</body>
-</html>
+	<!-- Termino de div listar -->
+	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+	<!-- Script necesario para el uso del Datatable-->
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script>
        $(document).ready(function(){
           console.log("Probando document ready");
@@ -81,6 +101,7 @@ $id=13;
 
        //Al presionar el boton btn_listar, ocurrira la función listar()
        $("#btn_listar").on("click", function(){
+       		console.log("Probando btn listar");
        		listar();
        });
 
@@ -96,11 +117,21 @@ $id=13;
     				{"data":"id"},
     				{"data":"nombre"},
     				{"data":"hobby"},
-    				{"defaultContent":'<button type="button" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button> <button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>'},
+    				{"defaultContent":'<button type="button" id="buttonEditar" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button> <button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>'},
     			],
     			"language": idioma_espanol,
     		});
+
+    		obtener_data_editar("#dt_cliente", table);
     	}
+
+    	var obtener_data_editar = function(tbody, table){
+    		$(tbody).on("click", "#buttonEditar", function(){
+    			var data = table.row( $(this).parents("tr")).data();
+    			console.log(data);
+    		});
+    	}
+
     	var idioma_espanol = {
 							    "aria": {
 							        "sortAscending": ": orden ascendente",
@@ -305,7 +336,7 @@ $id=13;
 							} 
     </script>
 
-					    	<script>
+					    	<!--<script>
 					    		//Función para listar datos. Se reemplazo por el método listar, pero aun sirve para hacer pruebas.
 					    		var mostrarDatos = function(id){
 									//var id = '<?=$id?>';
@@ -323,4 +354,8 @@ $id=13;
 										}
 									});
 								}
-							</script>
+							</script>-->
+
+</body>
+</html>
+
