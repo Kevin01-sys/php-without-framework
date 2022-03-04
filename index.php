@@ -20,27 +20,28 @@
 </head>
 <body>
 	<!-- Div en el que se podrá registrar usuarios -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-centrar">
-				<h1>Por favor ingrese los datos:</h1>
+	<form method="post" action="registro.php">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-centrar">
+					<h1>Por favor ingrese los datos:</h1>
 
-				<form method="post" action="registro.php">
-				  <input type="hidden" class="form-control" id="idusuario" name="idusuario">
-				  <div class="form-group">
-				    <label for="nombre">Nombre</label>
-				    <input type="text" class="form-control" id="nombreusuario" name="nombre" > 
-				  </div>
-				  <div class="form-group">
-				    <label for="hobby">Hobby</label>
-				    <input type="text" class="form-control" id="hobby" name="hobby" > 
-				  </div>
-				  <button type="submit" class="btn btn-primary">Enviar</button>
-				  <input type="button" id="btn_listar" class="btn btn-primary" value="Listar">
-				</form>
-			</div>	
+					  <input type="hidden" class="form-control" id="idusuario" name="idusuario">
+					  <div class="form-group">
+					    <label for="nombre">Nombre</label>
+					    <input type="text" class="form-control" id="nombreusuario" name="nombre" > 
+					  </div>
+					  <div class="form-group">
+					    <label for="hobby">Hobby</label>
+					    <input type="text" class="form-control" id="hobby" name="hobby" > 
+					  </div>
+					  <button type="submit" class="btn btn-primary">Enviar</button>
+					  <input type="button" id="btn_listar" class="btn btn-primary" value="Listar">
+					
+				</div>	
+			</div>
 		</div>
-	</div>
+	</form>
 	<!-- Termino de registro de usuarios -->
 
 	<!-- Sección en la cual se listan los datos, se puede borrar registros -->
