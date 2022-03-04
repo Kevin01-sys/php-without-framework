@@ -20,13 +20,14 @@
 </head>
 <body>
 	<!-- Div en el que se podrá registrar usuarios -->
-	<form method="post" action="registro.php">
+	<form id="frmEditarUsuario"  action="" method="POST">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-centrar">
 					<h1>Por favor ingrese los datos:</h1>
 
-					  <input type="hidden" class="form-control" id="idusuario" name="idusuario">
+					  <input type="hidden" class="form-control" id="id" name="id">
+					  <input type="hidden" id="opcion" name="opcion" value="modificar">
 					  <div class="form-group">
 					    <label for="nombre">Nombre</label>
 					    <input type="text" class="form-control" id="nombreusuario" name="nombre" > 
@@ -69,7 +70,7 @@
 
   <!-- Modal Eliminar usuario -->
   <form id="frmEliminarUsuario" action="" method="POST">
-  		<input type="hidden" id="idusuarioeliminar" value="">
+  		<input type="hidden" id="id" value="">
   		<input type="hidden" id="opcion" name="opcion" value="eliminar">
 		  <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
 		    <div class="modal-dialog" role="document">
@@ -101,7 +102,25 @@
        $(document).ready(function(){
           console.log("Probando document ready");
           listar();
+          guardar();
        });
+
+       var guardar = function(){
+       		$("#frmEditarUsuario").on("submit", function(e){
+       			e.preventDefault();
+       			var frm = $(this).serialize();
+       			console.log(frm);
+       			$.ajax({
+       				method: "POST",
+       				url: "guardar.php",
+       				data: frm
+       			}).done(function(info){
+       				console.log(info);
+       				var json_info = JSON.parse(info);
+       				console.log(json_info);
+       			});
+       		});
+       }
 
 
 
@@ -138,7 +157,7 @@
     	var obtener_data_editar = function(tbody, table){
     		$(tbody).on("click", "#buttonEditar", function(){
     			var data = table.row( $(this).parents("tr")).data();
-    			var idusuario = $("#idusuario").val(data.id),
+    			var idusuario = $("#id").val(data.id),
     				nombre = $("#nombreusuario").val(data.nombre),
     				hobby = $("#hobby").val(data.hobby);
     			console.log(data);	
