@@ -31,7 +31,8 @@ class Database{
         $this->prep= $this->db->prepare($this->consulta);
         if(!$this->prep){
             //echo ($this->prep);
-            echo("Error al preparar la consulta. <a href='index.php'>Regresar</a>");
+            // Este echo se quita debido a que se imprimira uno nuevo en pantalla, si dejo este me da problemas
+            //echo("Error al preparar la consulta. <a href='index.php'>Regresar</a>");
         } 
         else {
             //echo ("Sentencia preparada con éxito");
@@ -64,6 +65,17 @@ class Database{
     public function cerrar(){
         $this->prep->close();
         $this->db->close();
+    }
+
+    /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
+
+    public function ejecutar1(){
+        if(!$this->prep){
+            return null;
+        } 
+        else {
+            return $this->prep->execute();
+        }
     }
 
 

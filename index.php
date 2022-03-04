@@ -38,8 +38,8 @@
 					  </div>
 					  <button type="submit" class="btn btn-primary">Enviar</button>
 					  <input type="button" id="btn_listar" class="btn btn-primary" value="Listar">
-					
-				</div>	
+					  <div id="test" class="mensaje"></div>	
+				</div>
 			</div>
 		</div>
 	</form>
@@ -60,10 +60,11 @@
 				    </thead>
 				</table>
 				<!--<input type="button" class="btn btn-primary" onclick="mostrarDatos(<?php echo $id; ?>)" value="Listar antiguo">-->
-				<div id="test">
+				<div id="test" class="mensaje">
 					<!--<button type="button" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button>
 					<button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>-->
 				</div>
+
 
 		</div>
 	</div>
@@ -118,10 +119,41 @@
        				console.log(info);
        				var json_info = JSON.parse(info);
        				console.log(json_info);
+       				mostrar_mensaje(json_info);
+       				limpiar_datos();
        			});
        		});
        }
 
+		var mostrar_mensaje = function( informacion ){
+		var texto = "", color = "";
+		if( informacion.respuesta == "BIEN" ){
+		texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+		color = "#379911";
+		}else if( informacion.respuesta == "ERROR"){
+		texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+		color = "#C9302C";
+		}else if( informacion.respuesta == "EXISTE" ){
+		texto = "<strong>Información!</strong> el usuario ya existe.";
+		color = "#5b94c5";
+		}else if( informacion.respuesta == "VACIO" ){
+		texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
+		color = "#ddb11d";
+		}
+
+		$(".mensaje").html( texto ).css({"color": color });
+		$(".mensaje").fadeOut(5000, function(){
+		$(this).html("");
+		$(this).fadeIn(3000);
+		}); 
+		}
+
+		var limpiar_datos = function(){
+		$("#opcion").val("registrar");
+		$("#id").val("");
+		$("#nombreusuario").val("").focus();
+		$("#hobby").val("");
+		}
 
 
        //Al presionar el boton btn_listar, ocurrira la función listar()

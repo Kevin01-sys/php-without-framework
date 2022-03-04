@@ -6,7 +6,7 @@
 		require_once "$clase.php";
 
 	});
-	$informacion[];
+	$informacion = [];
 	//Se traen los datos $_POST
 	extract($_POST, EXTR_OVERWRITE);
 	//Instanciamos la clase Database para hacer la conexión y las consultas.
@@ -28,10 +28,20 @@
 		$query= "UPDATE usuarios SET nombre='$nombre',
 						  hobby='$hobby'
 					 WHERE id = '$id'";
-		$resultado = mysqli_query($db, $query);
-		verificar_resultado( $resultado);
-		cerrar( $db );
+	    $db->preparar($query);
+	    $resultado = $db->ejecutar1();
+	    //$resultado = $db->ejecutar();
+	    //$resultado = mysqli_query($db, $query);
+	    //echo $resultado;
+	    //echo ($resultado);
+	    //echo json_encode($resultado);
+	    //$db->liberar();
+		//$db->cerrar();
+		//$resultado = mysqli_query($db, $query);
+		verificar_resultado($resultado);
+		//cerrar( $db );
 	}
+
 
 	function eliminar($id,$db){
 		$query= "UPDATE usuarios SET estado=0 WHERE id = '$id'";
@@ -41,14 +51,14 @@
 	}
 
 	function verificar_resultado($resultado){
-		if (! $resultado )  $informacion ["respuesta"] = "ERROR";
-		else 	$informacion["respuesta"] = "BIEN";
+		if (! $resultado )  $informacion["respuesta"] = "ERROR";
+		else $informacion["respuesta"] = "BIEN";
 		echo json_encode($informacion);
 	}
 
-	function cerrar($db){
+	/*function cerrar($db){
 		mysql_close($db);
-	}
+	}*/
 
 
 ?>
