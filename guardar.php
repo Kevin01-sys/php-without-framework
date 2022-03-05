@@ -48,10 +48,19 @@
 
 
 	function eliminar($id,$db){
-		$query= "UPDATE usuarios SET estado=0 WHERE id = '$id'";
-		$resultado = mysqli_query($db, $query);
-		verificar_resultado( $resultado);
-		cerrar( $db );
+		$query= "UPDATE usuarios SET estado=0 WHERE id = '?'";
+		$validarpreparar=$db->preparar($query);
+	    // Si trae datos que ejecute el proceso de adjuntar variables a Query y ejecutarla
+	    if ($validarpreparar==1){
+		    $db->prep()->bind_param('i', $id);
+		    $resultado = $db->ejecutar();
+			verificar_resultado($resultado);
+		    $db->liberar();
+			$db->cerrar();
+	    } 
+	    	else { // No se ejecuta y solo se muestra el mensaje de error en pantalla
+	    	verificar_resultado($validarpreparar);
+	    }
 	}
 
 	function verificar_resultado($resultado){

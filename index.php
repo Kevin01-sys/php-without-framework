@@ -85,7 +85,7 @@
 		          ¿Estás seguro de eliminar al usuario?<strong data-name=""></strong>
 		        </div>
 		        <div class="modal-footer">
-		          <button type="button" onclick="" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+		          <button type="button" id="eliminar-usuario" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
 		          <button type="button" onclick="" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 		        </div>
 		      </div>
@@ -104,6 +104,7 @@
           console.log("Probando document ready");
           listar();
           guardar();
+          eliminar();
        });
 
        var guardar = function(){
@@ -123,6 +124,24 @@
        				limpiar_datos();
        			});
        		});
+       }
+
+       var eliminar = function(){
+       	$("#eliminar-usuario").on("click",function(){
+       		var idusuario = $("#frmEliminarUsuario #idusuario").val(),
+       			opcion = $("#frmEliminarUsuario #opcion").val();
+       			console.log(idusuario+opcion);
+       			$.ajax({
+       				method: "POST",
+       				url: "guardar.php",
+       				data: {"idusuario": idusuario,"opcion": opcion}
+       			}).done(function(info){
+       				var json_info=JSON.parse(info);
+       				mostrar_mensaje(json_info);
+       				limpiar_datos();
+       				listar();
+       			})
+       	});
        }
 
 		var mostrar_mensaje = function( informacion ){
