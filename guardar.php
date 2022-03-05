@@ -12,6 +12,7 @@
 	//Instanciamos la clase Database para hacer la conexión y las consultas.
 	$db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
+	// Se ejecutan en función de lo que trae $opción
 	switch ($opcion) {
 		case 'modificar':
 			modificar($id, $nombre, $hobby, $db);
@@ -25,21 +26,24 @@
 
 
 	function modificar($id, $nombre, $hobby, $db){
+		// Prepara una sentencia SQL con parámetros de signos de interrogación
 		$query= "UPDATE usuarios SET nombre='$nombre',
 						  hobby='$hobby'
-					 WHERE id = '$id'";
-	    $db->preparar($query);
-	    $resultado = $db->ejecutar1();
-	    //$resultado = $db->ejecutar();
-	    //$resultado = mysqli_query($db, $query);
-	    //echo $resultado;
-	    //echo ($resultado);
-	    //echo json_encode($resultado);
-	    //$db->liberar();
-		//$db->cerrar();
-		//$resultado = mysqli_query($db, $query);
-		verificar_resultado($resultado);
-		//cerrar( $db );
+					 WHERE id = ?";
+		// Se valida el resultado de preparación: null o 1 
+	    $validarpreparar=$db->preparar($query);
+
+	    // Si trae datos que ejecute el proceso de adjuntar variables a Query y ejecutarla
+	    if ($validarpreparar==1){
+		    $db->prep()->bind_param('i', $id);
+		    $resultado = $db->ejecutar();
+			verificar_resultado($resultado);
+		    $db->liberar();
+			$db->cerrar();
+	    } 
+	    	else { // No se ejecuta y solo se muestra el mensaje de error en pantalla
+	    	verificar_resultado($validarpreparar);
+	    }
 	}
 
 

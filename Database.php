@@ -27,22 +27,31 @@ class Database{
     /*En el metodo preparar, recibiremos la consulta como parametro y se la daremos al metodo "prepare" que la preparara; mandara false si el servidor tuvo problemas con la sentencia de consulta.*/
 
     public function preparar($consulta){
+        $validar=null;
         $this->consulta= $consulta;
         $this->prep= $this->db->prepare($this->consulta);
         if(!$this->prep){
-            //echo ($this->prep);
-            // Este echo se quita debido a que se imprimira uno nuevo en pantalla, si dejo este me da problemas
+            return $validar;
             //echo("Error al preparar la consulta. <a href='index.php'>Regresar</a>");
         } 
         else {
+            $validar=1;
+            return $validar;
             //echo ("Sentencia preparada con éxito");
         }
     }
     /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
 
     public function ejecutar(){
-        $this->prep->execute();
+        // Se ejecuta la query solo si el método preparar es diferente de nulo
+        if(!$this->prep){
+            return null;
+        } 
+        else {
+            return $this->prep->execute();
+        }
     }
+
 
     /*Usaremos una función pública para acceder a la sentencia que es una variable encapsulada/protected desde afuera de la clase, ya que usaremos un método que posee.*/
 
@@ -66,19 +75,6 @@ class Database{
         $this->prep->close();
         $this->db->close();
     }
-
-    /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
-
-    public function ejecutar1(){
-        if(!$this->prep){
-            return null;
-        } 
-        else {
-            return $this->prep->execute();
-        }
-    }
-
-
 
 }
 ?>
