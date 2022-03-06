@@ -10,7 +10,7 @@
 	extract($_POST, EXTR_OVERWRITE);
 	//Instanciamos la clase Database para hacer la conexión y las consultas.
 	$db= new Database(DB_HOST,DB_USER,DB_PASS,DB_NAME);
-			$db->preparar("SELECT * FROM usuarios");
+			$db->preparar("SELECT * FROM usuarios WHERE estado = 1");
 			$db->ejecutar();
 /*Aquí haremos uso de la consulta que estaba encapsulada en la clase, por que haremos uso del método "bind_result" que nos asigna cada registro que la consulta haya hecho a las variables que le suministremos (Se declaran dentro del mismo paso de parametros).*/
 			$db->prep()->bind_result($id,$nombre_BD,$hobby_BD,$estado_BD);

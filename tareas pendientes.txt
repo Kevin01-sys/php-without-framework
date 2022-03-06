@@ -1,0 +1,2 @@
+despues de listar ya no me vuelve a tomar los datos. 
+El limpiar, no limpia bien los id 

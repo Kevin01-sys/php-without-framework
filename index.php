@@ -26,8 +26,8 @@
 				<div class="col-md-6 col-centrar">
 					<h1>Por favor ingrese los datos:</h1>
 
-					  <input type="hidden" class="form-control" id="id" name="id">
-					  <input type="hidden" id="opcion" name="opcion" value="modificar">
+					  <input type="text" class="form-control" id="id" name="id">
+					  <input type="text" id="opcion" name="opcion" value="modificar">
 					  <div class="form-group">
 					    <label for="nombre">Nombre</label>
 					    <input type="text" class="form-control" id="nombreusuario" name="nombre" > 
@@ -71,8 +71,8 @@
 
   <!-- Modal Eliminar usuario -->
   <form id="frmEliminarUsuario" action="" method="POST">
-  		<input type="hidden" id="id" value="">
-  		<input type="hidden" id="opcion" name="opcion" value="eliminar">
+  		<input type="text" id="id" value="">
+  		<input type="text" id="opcion" name="opcion" value="eliminar">
 		  <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
 		    <div class="modal-dialog" role="document">
 		      <!-- Modal content-->
