@@ -59,25 +59,26 @@
     	var obtener_id_eliminar = function(tbody, table){
     		$(tbody).on("click", "#buttonEliminar", function(){
     			var data = table.row( $(this).parents("tr")).data();
-    			var idusuario = $("#frmEliminarUsuario #idusuarioeliminar").val(data.id);
+    			var idusuario = $("#frmEliminarUsuario #id").val(data.id);
     			console.log(data);	
     		});
     	}
     	// Se elimina el usuario al cambiar su estado a 0. 
        var eliminar = function(){
        	$("#eliminar-usuario").on("click",function(){
-       		var idusuario = $("#frmEliminarUsuario #idusuario").val(),
+       		var idusuario = $("#frmEliminarUsuario #id").val(),
        			opcion = $("#frmEliminarUsuario #opcion").val();
        			console.log(idusuario+opcion);
        			$.ajax({
        				method: "POST",
        				url: "guardar.php",
-       				data: {"idusuario": idusuario,"opcion": opcion}
+       				data: {"id": idusuario,"opcion": opcion}
        			}).done(function(info){
        				var json_info=JSON.parse(info);
        				mostrar_mensaje(json_info);
        				limpiar_datos();
        				listar();
+       				console.log(json_info);
        			})
        	});
        }

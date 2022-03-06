@@ -48,7 +48,7 @@
 
 
 	function eliminar($id,$db){
-		$query= "UPDATE usuarios SET estado=0 WHERE id = '?'";
+		$query= "UPDATE usuarios SET estado=0 WHERE id = ?";
 		$validarpreparar=$db->preparar($query);
 	    // Si trae datos que ejecute el proceso de adjuntar variables a Query y ejecutarla
 	    if ($validarpreparar==1){
