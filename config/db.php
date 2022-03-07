@@ -1,0 +1,14 @@
+<?php 
+ 
+	/**
+	* Conexion a bbdd usando mysqli
+	*/
+	class Connect 
+	{
+		
+		public static function connection(){
+			$cnx = new mysqli("localhost", "root", "1234", "tutorial");
+			return $cnx;
+		}
+	}
+?>
