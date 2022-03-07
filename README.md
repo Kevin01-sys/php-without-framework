@@ -1,6 +1,13 @@
-Se haran distintas pruebas a través de conexión a la base de datos con PDO 
-Metas a realizar: 
-1 Generar un pdf, excell, word. 
-2 Usuarios para el sistema. 
-3 Crear crud completo con PDO usando clase nueva.
-4 Se muestren usuarios resgristro de usuarios al abrir index.php.
+### Sobre el programa
+
+- Diseñado bajo el patron de arquitectura MVC
+- CRUD completo para usuarios utilizando PDO.
+- login y logout
+- Usuarios para el sistema los cuales tendrán ciertas restricciones segun los permisos que se le otorguen
+- Generar un pdf, excell, word
+
+###Images
+
+Image:
+
+![](https://pandao.github.io/editor.md/examples/images/4.jpg)
