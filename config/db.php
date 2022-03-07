@@ -1,5 +1,5 @@
 <?php 
- 
+require_once('config.php');
 	/**
 	* Conexion a bbdd usando mysqli
 	*/
@@ -7,8 +7,9 @@
 	{
 		
 		public static function connection(){
-			$cnx = new mysqli("localhost", "root", "1234", "tutorial");
-			return $cnx;
+			$con = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+			return $con;
 		}
+
 	}
 ?>
