@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Tutorial Conexión PHP BD puro</title>
 	<!-- Css usado para dar estilo a la hoja -->
-	<link href="basic.css" rel="stylesheet" title="Default Style">
+	<link href="css/basic.css" rel="stylesheet" title="Default Style">
 	<!-- Librerias que podrían ser para los botones de exportar documentos pero no funcionaron
 	<link href="buttons.dataTables.min.css" rel="stylesheet" title="Default Style">
 	<link href="jquery.dataTables.min.css" rel="stylesheet" title="Default Style">-->
@@ -122,7 +122,7 @@
 	<script src="js/buttons.html5.min.js"></script>-->
 	<!-- Script necesario para el uso del Datatable-->
     <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="app.js"></script>
+    <script src="js/app.js"></script>
     <script>
        $(document).ready(function(){
           listar();
