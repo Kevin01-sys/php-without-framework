@@ -26,7 +26,7 @@
     				{"data":"hobby"},
 					{"defaultContent": "<button type='button' id='buttonEditar' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	<button type='button'id='buttonEliminar' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}	
 				],
-				language: idioma_espanol
+				language: idioma_espanol,
 			});
 
 			obtener_data_editar("#dt_cliente tbody", table);
@@ -97,27 +97,31 @@
 
 		// Función que se usa para mostrar un mensaje en pantalla
 		var mostrar_mensaje = function( informacion ){
-		var texto = "", color = "";
-		if( informacion.respuesta == "BIEN" ){
-		texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
-		color = "#379911";
-		}else if( informacion.respuesta == "ERROR"){
-		texto = "<strong>Error</strong>, no se ejecutó la consulta.";
-		color = "#C9302C";
-		}else if( informacion.respuesta == "EXISTE" ){
-		texto = "<strong>Información!</strong> el usuario ya existe.";
-		color = "#5b94c5";
-		}else if( informacion.respuesta == "VACIO" ){
-		texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
-		color = "#ddb11d";
+			var texto = "", color = "";
+			if( informacion.respuesta == "BIEN" ){
+					texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+					color = "#379911";
+			}else if( informacion.respuesta == "ERROR"){
+					texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+					color = "#C9302C";
+			}else if( informacion.respuesta == "EXISTE" ){
+					texto = "<strong>Información!</strong> el usuario ya existe.";
+					color = "#5b94c5";
+			}else if( informacion.respuesta == "VACIO" ){
+					texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
+					color = "#ddb11d";
+			}else if( informacion.respuesta == "OPCION_VACIA" ){
+					texto = "<strong>Advertencia!</strong> la opción no existe o esta vacia, recargar la página.";
+					color = "#ddb11d";
+			}
+
+			$(".mensaje").html( texto ).css({"color": color });
+			$(".mensaje").fadeOut(5000, function(){
+					$(this).html("");
+					$(this).fadeIn(3000);
+			});			
 		}
 
-		$(".mensaje").html( texto ).css({"color": color });
-		$(".mensaje").fadeOut(5000, function(){
-		$(this).html("");
-		$(this).fadeIn(3000);
-		}); 
-		}
 		var limpiar_datos = function(){
 			$("#opcion").val("registrar");
 			$("#idusuario").val("");

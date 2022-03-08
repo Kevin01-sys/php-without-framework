@@ -14,6 +14,20 @@
 
 	// Se ejecutan en función de lo que trae $opción
 	switch ($opcion) {
+		case 'registrar':
+			if( $nombre != "" &amp;&amp; $apellidos != "" &amp;&amp; $dni != "" ){
+				$existe = existe_usuario($dni, $conexion);
+				if (existe >0){
+					$informacion["respuesta"]="EXISTE;"
+					echo json_encode($informacion);
+				}else{
+					registrar($nombre, $apellidos, $dni, $conexion);
+				}
+								
+			}else{
+				$informacion["respuesta"] = "VACIO";
+				echo json_encode($informacion);
+			}
 		case 'modificar':
 			modificar($id, $nombre, $hobby, $db);
 			break;
@@ -22,6 +36,20 @@
 			# code...
 			eliminar($id,$db);
 			break;
+	}
+
+	function existe_usuario($dni, $conexion){
+		$query = "SELECT idusuario FROM usuario WHERE dni = '$dni';";
+		$resultado = mysqli_query($conexion, $query);
+		$existe_usuario = mysqli_num_rows( $resultado );
+		return $existe_usuario;
+	}
+
+	function registrar($nombre, $apellidos, $dni, $conexion){
+		$query = "INSERT INTO usuario VALUES(0, '$nombre', '$apellidos', '$dni', 1);";
+		$resultado = mysqli_query($conexion, $query);		
+		verificar_resultado($resultado);
+		cerrar($conexion);
 	}
 
 

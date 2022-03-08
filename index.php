@@ -7,6 +7,9 @@
 	<title>Tutorial Conexión PHP BD puro</title>
 	<!-- Css usado para dar estilo a la hoja -->
 	<link href="basic.css" rel="stylesheet" title="Default Style">
+	<!-- Librerias que podrían ser para los botones de exportar documentos pero no funcionaron
+	<link href="buttons.dataTables.min.css" rel="stylesheet" title="Default Style">
+	<link href="jquery.dataTables.min.css" rel="stylesheet" title="Default Style">-->
 	<!--Librerias para el uso del Datatable-->
 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
 	<!-- Librerias para el uso de bootstrap -->
@@ -50,6 +53,7 @@
 			
 		</div>
 	</div>
+	<!--<div class="note" id="Registrar y botones exportar"><a name="registrar y botones exportar"></a><h1>Registrar y botones exportar</h1>Describa aquí su nota nueva.</div>->
 	<!-- Termino de registro de usuarios -->
 
 	<!-- Sección en la cual se listan los datos, se puede borrar registros -->
@@ -108,6 +112,14 @@
 
 	<!-- Termino de div listar -->
 	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+	<!-- Librerias que podrían ser para los botones de exportar documentos pero no funcionaron
+	<script src="js/jquery-3.5.1.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/jszip.min.js"></script>
+	<script src="js/dataTables.buttons.min.js"></script>
+	<script src="js/pdfmake.min.js"></script>
+	<script src="js/vfs_fonts.js"></script>
+	<script src="js/buttons.html5.min.js"></script>-->
 	<!-- Script necesario para el uso del Datatable-->
     <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="app.js"></script>
