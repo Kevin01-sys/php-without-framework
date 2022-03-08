@@ -20,79 +20,90 @@
 </head>
 <body>
 	<!-- Div en el que se podrá registrar usuarios -->
-	<form id="frmEditarUsuario"  action="" method="POST">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-centrar">
-					<h1>Por favor ingrese los datos:</h1>
-
-					  <input type="text" class="form-control" id="id" name="id">
-					  <input type="text" id="opcion" name="opcion" value="modificar">
-					  <div class="form-group">
-					    <label for="nombre">Nombre</label>
-					    <input type="text" class="form-control" id="nombreusuario" name="nombre" > 
-					  </div>
-					  <div class="form-group">
-					    <label for="hobby">Hobby</label>
-					    <input type="text" class="form-control" id="hobby" name="hobby" > 
-					  </div>
-					  <button type="submit" class="btn btn-primary">Enviar</button>
-					  <input type="button" id="btn_listar" class="btn btn-primary" value="Listar">
-					  <div id="test" class="mensaje"></div>	
+	<div class="row">
+		<div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar">
+			<form class="form-horizontal" id="frmEditarUsuario" action="" method="POST">
+				<div class="form-group">
+					<h3 class="col-sm-offset-2 col-sm-8 text-center">					
+					Formulario de Registro de Usuarios</h3>
 				</div>
+				<input type="text" id="id" name="id" value="0">
+				<input type="text" id="opcion" name="opcion" value="registrar">
+				<div class="form-group">
+					<label for="nombre" class="col-sm-2 control-label">Nombres</label>
+					<div class="col-sm-8"><input id="nombreusuario" name="nombre" type="text" class="form-control"  autofocus></div>				
+				</div>
+				<div class="form-group">
+					<label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+					<div class="col-sm-8"><input id="hobby" name="hobby" type="text" class="form-control" ></div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<input id="" type="submit" class="btn btn-primary" value="Guardar">
+						<input id="btn_listar" type="button" class="btn btn-primary" value="Listar">
+					</div>
+				</div>
+			</form>
+			<div class="col-sm-offset-2 col-sm-8">
+				<p class="mensaje"></p>
 			</div>
+			
 		</div>
-	</form>
+	</div>
 	<!-- Termino de registro de usuarios -->
 
 	<!-- Sección en la cual se listan los datos, se puede borrar registros -->
 	<div class="row">
-		<div class="table-responsive col-sm-12">
-			<h1>Mostrar y editar datos:</h1>
-				<table id="dt_cliente" class="table table-bordered table-hover" cellpadding="0" width="100%">
-				    <thead>
-					    <tr>
-					      <th scope="col">Id</th>
-					      <th scope="col">Nombre</th>
-					      <th scope="col">Hobby</th>
-					      <th scope="col"></th>
-					    </tr>
-				    </thead>
+		<div id="cuadro1" class="col-sm-12 col-md-12 col-lg-12">
+			<div class="col-sm-offset-2 col-sm-8">
+				<h3 class="text-center"> <small class="mensaje"></small></h3>
+			</div>
+			<div class="table-responsive col-sm-12">		
+				<table id="dt_cliente" class="table table-bordered table-hover" cellspacing="0" width="100%">
+					<thead>
+						<tr>								
+					      <th>Id</th>
+					      <th>Nombre</th>
+					      <th>Hobby</th>
+					      <th></th>										
+						</tr>
+					</thead>					
 				</table>
 				<!--<input type="button" class="btn btn-primary" onclick="mostrarDatos(<?php echo $id; ?>)" value="Listar antiguo">-->
 				<div id="test" class="mensaje">
 					<!--<button type="button" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button>
 					<button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>-->
 				</div>
-
-
-		</div>
+			</div>			
+		</div>		
 	</div>
 
   <!-- Modal Eliminar usuario -->
-  <form id="frmEliminarUsuario" action="" method="POST">
-  		<input type="text" id="id" value="">
-  		<input type="text" id="opcion" name="opcion" value="eliminar">
-		  <div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
-		    <div class="modal-dialog" role="document">
-		      <!-- Modal content-->
-		      <div class="modal-content">
-		        <div class="modal-header">
-		          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		          <h4 class="modal-title" id="modalEliminarLabel">Eliminar usuario</h4>
-		        </div>
-		        <div class="modal-body">
-		          ¿Estás seguro de eliminar al usuario?<strong data-name=""></strong>
-		        </div>
-		        <div class="modal-footer">
-		          <button type="button" id="eliminar-usuario" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
-		          <button type="button" onclick="" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        </div>
-		      </div>
-		      
-		    </div>
-		  </div>
-  </form>
+	<div>
+		<form id="frmEliminarUsuario" action="" method="POST">
+			<input type="text" id="id" name="idusuario" value="">
+			<input type="text" id="opcion" name="opcion" value="eliminar">
+			<!-- Modal -->
+			<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="modalEliminarLabel">Eliminar Usuario</h4>
+						</div>
+						<div class="modal-body">							
+							¿Está seguro de eliminar al usuario?<strong data-name=""></strong>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="eliminar-usuario" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+		</form>
+	</div>
   <!-- Fin Modal Eliminar usuario -->
 
 	<!-- Termino de div listar -->
@@ -102,7 +113,6 @@
     <script src="app.js"></script>
     <script>
        $(document).ready(function(){
-          console.log("Probando document ready");
           listar();
           guardar();
           eliminar();
