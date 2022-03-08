@@ -18,6 +18,7 @@
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<!-- Con el link rel y los 2 script es que se puede levantar el modal -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
@@ -53,8 +54,10 @@
 			
 		</div>
 	</div>
-	<!--<div class="note" id="Registrar y botones exportar"><a name="registrar y botones exportar"></a><h1>Registrar y botones exportar</h1>Describa aquí su nota nueva.</div>->
-	<!-- Termino de registro de usuarios -->
+	<!--Termino de registro de usuarios -->
+	<!--<div class="note" id="Registrar y botones exportar"><a name="registrar y botones exportar"></a><h1>Registrar y botones exportar</h1>Describa aquí su nota nueva.</div>-->
+	
+	<button type='button' id='agregarUsuario' class='btn btn-success'><i class='fa fa-user-plus' aria-hidden='true'></i></button>
 
 	<!-- Sección en la cual se listan los datos, se puede borrar registros -->
 	<div class="row">
@@ -66,7 +69,7 @@
 				<table id="dt_cliente" class="table table-bordered table-hover" cellspacing="0" width="100%">
 					<thead>
 						<tr>								
-					      <th>Id</th>
+					      <th>Run</th>
 					      <th>Nombre</th>
 					      <th>Hobby</th>
 					      <th></th>										

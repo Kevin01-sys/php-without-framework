@@ -1,13 +1,19 @@
-       //Al presionar el boton btn_listar, ocurrira la función listar()
+		//Al presionar el boton btn_listar, ocurrira la función listar()
        $("#btn_listar").on("click", function(){
        		console.log("Probando btn listar");
        		listar();
        });
 
+       //Al presionar el boton btn_listar, ocurrira la función listar()
+       $("#agregarUsuario").on("click", function(){
+       		console.log("Probando btn agregar usuario");
+       		agregar_nuevo_usuario();
+       });
+
        //La funcíón listar transforma el table "dt_cliente" en un Datatable y trae los datos del servidor 
 		var listar = function(){
-				//$("#cuadro2").slideUp("slow");
-				//$("#cuadro1").slideDown("slow");
+				$("#cuadro2").slideUp("slow");
+				$("#cuadro1").slideDown("slow");
 				//DataTable daba problemas despues de usar el listar, para resolverlo se uso empty.
 				//Sino me traia data is undefined al tratar de traer la fila a una variable o datos duplicados o hasta triplicados y subia cada vez que listaba. 
 				// Se inicializa, se deja vacio, se destruye, y se vuelve a armar. Es el proceso cada vez que se lista.
@@ -21,7 +27,7 @@
 					"url": "listarUsuario.php"
 				},
 				columns:[
-    				{"data":"id"},
+    				{"data":"run"},
     				{"data":"nombre"},
     				{"data":"hobby"},
 					{"defaultContent": "<button type='button' id='buttonEditar' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	<button type='button'id='buttonEliminar' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}	
@@ -43,8 +49,8 @@
     				opcion = $("#opcion").val("modificar");
     			console.log(data);	
 
-				//$("#cuadro2").slideDown("slow");
-				//$("#cuadro1").slideUp("slow");
+				$("#cuadro2").slideDown("slow");
+				$("#cuadro1").slideUp("slow");
     		});
     	}
 

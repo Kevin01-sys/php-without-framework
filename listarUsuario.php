@@ -13,12 +13,12 @@
 			$db->preparar("SELECT * FROM usuarios WHERE estado = 1");
 			$db->ejecutar();
 /*Aquí haremos uso de la consulta que estaba encapsulada en la clase, por que haremos uso del método "bind_result" que nos asigna cada registro que la consulta haya hecho a las variables que le suministremos (Se declaran dentro del mismo paso de parametros).*/
-			$db->prep()->bind_result($id,$nombre_BD,$hobby_BD,$estado_BD);
+			$db->prep()->bind_result($id,$run,$nombre_BD,$hobby_BD,$estado_BD);
 
 			// resultado() en Database hace un fetch() por lo que ira pasando fila por fila en el registro de lo que encuentra
 			while($db->resultado()){
 				$data['status'] = 'ok';
-				$data['data'][]  = ["id" => $id,"nombre" => $nombre_BD,"hobby" => $hobby_BD];
+				$data['data'][]  = ["id"=> $id,"run" => $run,"nombre" => $nombre_BD,"hobby" => $hobby_BD];
 				//$data['id'][] = $id;
 				//$data['data']['id'][] = $id;
 				//$data[$i] = $nombre_BD;

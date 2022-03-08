@@ -15,13 +15,14 @@
 	// Se ejecutan en función de lo que trae $opción
 	switch ($opcion) {
 		case 'registrar':
-			if( $nombre != "" &amp;&amp; $apellidos != "" &amp;&amp; $dni != "" ){
-				$existe = existe_usuario($dni, $conexion);
+			if( $nombre != "" && $hobby != "" && $id != "" ){
+				$existe = existe_usuario($id, $db);
+				$existe=0;
 				if (existe >0){
-					$informacion["respuesta"]="EXISTE;"
+					$informacion["respuesta"]="EXISTE";
 					echo json_encode($informacion);
 				}else{
-					registrar($nombre, $apellidos, $dni, $conexion);
+					registrar($nombre, $apellidos, $id, $db);
 				}
 								
 			}else{
@@ -38,18 +39,26 @@
 			break;
 	}
 
-	function existe_usuario($dni, $conexion){
-		$query = "SELECT idusuario FROM usuario WHERE dni = '$dni';";
-		$resultado = mysqli_query($conexion, $query);
-		$existe_usuario = mysqli_num_rows( $resultado );
-		return $existe_usuario;
+	function existe_usuario($id, $db){
+		$query = "SELECT id FROM usuarios WHERE id = '$id';";
+		$validarpreparar=$db->preparar($query);
+	    if ($validarpreparar==1){
+		    $resultado = $db->ejecutar();
+			verificar_resultado($resultado);
+		    $db->liberar();
+			$db->cerrar();
+	    }
+		//$resultado = mysqli_query($conexion, $query);
+		//$existe_usuario = mysqli_num_rows( $resultado );
+		return $validarpreparar;
 	}
 
-	function registrar($nombre, $apellidos, $dni, $conexion){
-		$query = "INSERT INTO usuario VALUES(0, '$nombre', '$apellidos', '$dni', 1);";
-		$resultado = mysqli_query($conexion, $query);		
-		verificar_resultado($resultado);
-		cerrar($conexion);
+	function registrar($nombre, $hobby, $id, $db){
+		$query = "INSERT INTO usuarios VALUES(0, '$nombre', '$hobby', '$id', 1);";
+		$validarpreparar=$db->preparar($query);
+		//$resultado = mysqli_query($conexion, $query);		
+		//verificar_resultado($resultado);
+		//cerrar($conexion);
 	}
 
 
