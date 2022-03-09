@@ -1,95 +1,141 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Select Multiple</title>
-	<script
-	src="https://code.jquery.com/jquery-3.3.1.min.js"
-	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-	crossorigin="anonymous"></script>
-	<script src="js/jquery-2.1.0.min.js"></script>
-	
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Tutorial Conexión PHP BD puro</title>
+	<!-- Css usado para dar estilo a la hoja -->
+	<link href="css/basic.css" rel="stylesheet" title="Default Style">
+	<!-- Librerias que podrían ser para los botones de exportar documentos pero no funcionaron
+	<link href="buttons.dataTables.min.css" rel="stylesheet" title="Default Style">
+	<link href="jquery.dataTables.min.css" rel="stylesheet" title="Default Style">-->
+	<!--Librerias para el uso del Datatable-->
+	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
+	<!-- Librerias para el uso de bootstrap -->
+	<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">-->
+	<!-- Librerias para los iconos de los botones -->
+	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<!-- Con el link rel y los 2 script es que se puede levantar el modal -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h2>Resultado a partir de 2 Select</h2>
+	<!-- Div en el que se podrá registrar usuarios -->
+	<div class="row">
+		<div id="cuadro2" class="col-sm-12 col-md-12 col-lg-12 ocultar">
+			<form class="form-horizontal" id="frmEditarUsuario" action="" method="POST">
+				<div class="form-group">
+					<h3 class="col-sm-offset-2 col-sm-8 text-center">					
+					Formulario de Registro de Usuarios</h3>
+				</div>
+				<input type="hidden" id="id" name="id" value="0">
+				<input type="hidden" id="opcion" name="opcion" value="registrar">
+				<div class="form-group">
+					<label for="nombre" class="col-sm-2 control-label">Run</label>
+					<div class="col-sm-8"><input id="run" name="run" type="text" class="form-control" autofocus></div>				
+				</div>
+				<div class="form-group">
+					<label for="nombre" class="col-sm-2 control-label">Nombres</label>
+					<div class="col-sm-8"><input id="nombreusuario" name="nombre" type="text" class="form-control"  autofocus></div>			
+				</div>
+				<div class="form-group">
+					<label for="apellidos" class="col-sm-2 control-label">Hobby</label>
+					<div class="col-sm-8"><input id="hobby" name="hobby" type="text" class="form-control" ></div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<input id="" type="submit" class="btn btn-primary" value="Guardar">
+						<input id="btn_listar" type="button" class="btn btn-primary" value="Listar">
+					</div>
+				</div>
+			</form>
+			<div class="col-sm-offset-2 col-sm-8">
+				<p class="mensaje"></p>
+			</div>
+			
+		</div>
+	</div>
+	<!--Termino de registro de usuarios -->
+	<!--<div class="note" id="Registrar y botones exportar"><a name="registrar y botones exportar"></a><h1>Registrar y botones exportar</h1>Describa aquí su nota nueva.</div>-->
+	
+	<button type='button' id='agregarUsuario' class='btn btn-success'><i class='fa fa-user-plus' aria-hidden='true'></i></button>
 
-			<label>SELECT 1 (Categoria)</label>
-			<select id="lista1" name="lista1">
-				<option value="0">Selecciona una categoria</option>
-				<option value="1">A</option>
-				<option value="2">B</option>
-				<option value="3">C</option>
-				<option value="4">D</option>
-			</select>
-			<br>
-			<label>SELECT 2 (Niveles)</label>
-			<select id="lista2" name="lista2">
-				<option value="0">Selecciona un nivel</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-			</select>
-			<br>
- 			<div id="select2lista"></div> 
- 			<div id="select3lista"></div> 
-  			<p>Name: <span id="userName"></span></p>  
+	<!-- Sección en la cual se listan los datos, se puede borrar registros -->
+	<div class="row">
+		<div id="cuadro1" class="col-sm-12 col-md-12 col-lg-12">
+			<div class="col-sm-offset-2 col-sm-8">
+				<h3 class="text-center"> <small class="mensaje"></small></h3>
+			</div>
+			<div class="table-responsive col-sm-12">		
+				<table id="dt_cliente" class="table table-bordered table-hover" cellspacing="0" width="100%">
+					<thead>
+						<tr>								
+					      <th>Run</th>
+					      <th>Nombre</th>
+					      <th>Hobby</th>
+					      <th></th>										
+						</tr>
+					</thead>					
+				</table>
+				<!--<input type="button" class="btn btn-primary" onclick="mostrarDatos(<?php echo $id; ?>)" value="Listar antiguo">-->
+				<div id="test" class="mensaje">
+					<!--<button type="button" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button>
+					<button type="button" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button>-->
+				</div>
+			</div>			
+		</div>		
+	</div>
 
-			<input type="text" id="sueldo">
-			<input type="text" id="primaria">
-			<input type="text" id="ley">
+  <!-- Modal Eliminar usuario -->
+	<div>
+		<form id="frmEliminarUsuario" action="" method="POST">
+			<input type="hidden" id="id" name="idusuario" value="">
+			<input type="hidden" id="opcion" name="opcion" value="eliminar">
+			<!-- Modal -->
+			<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="modalEliminarLabel">Eliminar Usuario</h4>
+						</div>
+						<div class="modal-body">							
+							¿Está seguro de eliminar al usuario?<strong data-name=""></strong>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="eliminar-usuario" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Modal -->
+		</form>
+	</div>
+  <!-- Fin Modal Eliminar usuario -->
+
+	<!-- Termino de div listar -->
+	<!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+	<!-- Librerias que podrían ser para los botones de exportar documentos pero no funcionaron
+	<script src="js/jquery-3.5.1.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/jszip.min.js"></script>
+	<script src="js/dataTables.buttons.min.js"></script>
+	<script src="js/pdfmake.min.js"></script>
+	<script src="js/vfs_fonts.js"></script>
+	<script src="js/buttons.html5.min.js"></script>-->
+	<!-- Script necesario para el uso del Datatable-->
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+       $(document).ready(function(){
+          listar();
+          guardar();
+          eliminar();
+       });
+    </script>
 
 </body>
 </html>
-<script >
-	$(document).ready(function(){
-		 $('#lista1').val(1);
-		  recargarLista();
-		 $('#lista2').change(function(){
-		 	//console.log("Probando 5,6,7");
-		 	mostrarDatos();
-		 	})
-		 $('#lista1').change(function(){
-		 	//console.log("Probando 1,2,3");
-		 	mostrarDatos();
-
-		 })
-	})
-</script>
-
-<script >
-	function recargarLista(){
-		$.ajax({
-			type:"POST",
-			url:"datos.php",
-			data:"id_categoria=" + $('#lista1').val(), // OBTIENE EL APUNTADOR DE LA LISTA
-			//data:"id_categoria=" + $('#lista1').text(), // OBTIENE EL TEXTO DE LA LISTA 
-			success:function(r){
-				$('#select2lista').html(r);
-			}
-		});
-	}
-	function mostrarDatos(){
-		$.ajax({
-			type:"POST",
-			url:"datosprueba.php",
-			dataType: "json",
-			data: {'id_categoria': $('#lista1').val(),
-				   'nivel': $('#lista2').val()},
-				   
-			success:function(data){
-				if(data.status == 'ok') {
-					document.getElementById("sueldo").value = data.result.id;
-					document.getElementById("primaria").value = data.result.id_continente;
-					document.getElementById("ley").value = data.result.pais;
-
-				} else 
-				{
-					document.getElementById("sueldo").value = "Nivel y Categoria deben ser seleccionados" ;
-					document.getElementById("primaria").value = "Nivel y Categoria deben ser seleccionados";
-					document.getElementById("ley").value = "Nivel y Categoria deben ser seleccionados";
-				}
-			}
-		});
-	}
-</script>
