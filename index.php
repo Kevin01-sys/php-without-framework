@@ -34,6 +34,10 @@
 				<input type="text" id="id" name="id" value="0">
 				<input type="text" id="opcion" name="opcion" value="registrar">
 				<div class="form-group">
+					<label for="nombre" class="col-sm-2 control-label">Run</label>
+					<div class="col-sm-8"><input id="run" name="run" type="text" class="form-control"  autofocus></div>				
+				</div>
+				<div class="form-group">
 					<label for="nombre" class="col-sm-2 control-label">Nombres</label>
 					<div class="col-sm-8"><input id="nombreusuario" name="nombre" type="text" class="form-control"  autofocus></div>				
 				</div>

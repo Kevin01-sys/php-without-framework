@@ -15,20 +15,7 @@
 	// Se ejecutan en función de lo que trae $opción
 	switch ($opcion) {
 		case 'registrar':
-			if( $nombre != "" && $hobby != "" && $id != "" ){
-				$existe = existe_usuario($id, $db);
-				$existe=0;
-				if (existe >0){
-					$informacion["respuesta"]="EXISTE";
-					echo json_encode($informacion);
-				}else{
-					registrar($nombre, $apellidos, $id, $db);
-				}
-								
-			}else{
-				$informacion["respuesta"] = "VACIO";
-				echo json_encode($informacion);
-			}
+			registrar($run,$nombre, $hobby, $id, $db);			
 		case 'modificar':
 			modificar($id, $nombre, $hobby, $db);
 			break;
@@ -37,6 +24,28 @@
 			# code...
 			eliminar($id,$db);
 			break;
+	}
+
+	function registrar($run,$nombre, $hobby, $id, $db){
+		$query = "INSERT INTO usuarios VALUES(NULL,'$run','$nombre','$hobby', 1);";
+		$validarpreparar=$db->preparar($query);
+	    // Si trae datos que ejecute el proceso de adjuntar variables a Query y ejecutarla
+	    if ($validarpreparar==1){
+	    	//$db->prep()->bind_param('id', NULL);
+		    //$db->prep()->bind_param('run', $run);
+		    //$db->prep()->bind_param('nombre', $nombre);
+		    //$db->prep()->bind_param('hobby', $hobby);
+		    //$db->prep()->bind_param('estado', 1);
+		    $resultado = $db->ejecutar();
+			verificar_resultado($resultado);
+		    $db->liberar();
+			$db->cerrar();
+	    } else { // No se ejecuta y solo se muestra el mensaje de error en pantalla
+	    	verificar_resultado($validarpreparar);
+	    }
+		//$resultado = mysqli_query($conexion, $query);		
+		//verificar_resultado($resultado);
+		//cerrar($conexion);
 	}
 
 	function existe_usuario($id, $db){
@@ -51,14 +60,6 @@
 		//$resultado = mysqli_query($conexion, $query);
 		//$existe_usuario = mysqli_num_rows( $resultado );
 		return $validarpreparar;
-	}
-
-	function registrar($nombre, $hobby, $id, $db){
-		$query = "INSERT INTO usuarios VALUES(0, '$nombre', '$hobby', '$id', 1);";
-		$validarpreparar=$db->preparar($query);
-		//$resultado = mysqli_query($conexion, $query);		
-		//verificar_resultado($resultado);
-		//cerrar($conexion);
 	}
 
 
