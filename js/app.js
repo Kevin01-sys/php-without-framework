@@ -9,7 +9,7 @@
     			"destroy": true,
     			"ajax":{
     				"method":"POST",
-    				"url":"listarUsuario.php"
+    				"url":"controllers/ajax/listarUsuario.php"
     			},
     			"columns":[
     				{"data":"id"},
@@ -44,7 +44,7 @@
        			console.log(frm);
        			$.ajax({
        				method: "POST",
-       				url: "guardar.php",
+       				url: "controllers/ajax/guardar.php",
        				data: frm
        			}).done(function(info){
        				console.log(info);
@@ -71,7 +71,7 @@
        			console.log(idusuario+opcion);
        			$.ajax({
        				method: "POST",
-       				url: "guardar.php",
+       				url: "controllers/ajax/guardar.php",
        				data: {"id": idusuario,"opcion": opcion}
        			}).done(function(info){
        				var json_info=JSON.parse(info);
