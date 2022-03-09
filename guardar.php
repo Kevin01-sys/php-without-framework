@@ -7,6 +7,7 @@
 
 	});
 	$informacion = [];
+	$estado=1;
 	//Se traen los datos $_POST
 	extract($_POST, EXTR_OVERWRITE);
 	//Instanciamos la clase Database para hacer la conexión y las consultas.
@@ -15,81 +16,64 @@
 	// Se ejecutan en función de lo que trae $opción
 	switch ($opcion) {
 		case 'registrar':
-			registrar($run,$nombre, $hobby, $id, $db);			
+			//Si las variables vienen vacias se le avisa al usuario por pantalla que debe llenar todos los campos
+			if($run != "" && $nombre != "" && $hobby != ""){
+				$validarUsuario= $db->validarDatos("run","usuarios",$run);
+				// si el usuario no existe se ingresa, sino se le avisa al usuario que no puede ingresarlo
+				if($validarUsuario>0){
+					$informacion["respuesta"] = "EXISTE";
+					echo json_encode($informacion);
+				}else{
+					registrar($run,$nombre, $hobby, $db);
+				}
+				
+			}else{
+				$informacion["respuesta"] = "VACIO";
+				echo json_encode($informacion);
+			}
+			break;		
 		case 'modificar':
-			modificar($id, $nombre, $hobby, $db);
+			modificar($id,$run, $nombre, $hobby, $db);
 			break;
-		
+
 		case 'eliminar':
-			# code...
 			eliminar($id,$db);
 			break;
+
 	}
 
-	function registrar($run,$nombre, $hobby, $id, $db){
-		$query = "INSERT INTO usuarios VALUES(NULL,'$run','$nombre','$hobby', 1);";
-		$validarpreparar=$db->preparar($query);
-	    // Si trae datos que ejecute el proceso de adjuntar variables a Query y ejecutarla
-	    if ($validarpreparar==1){
-	    	//$db->prep()->bind_param('id', NULL);
-		    //$db->prep()->bind_param('run', $run);
-		    //$db->prep()->bind_param('nombre', $nombre);
-		    //$db->prep()->bind_param('hobby', $hobby);
-		    //$db->prep()->bind_param('estado', 1);
-		    $resultado = $db->ejecutar();
-			verificar_resultado($resultado);
-		    $db->liberar();
-			$db->cerrar();
-	    } else { // No se ejecuta y solo se muestra el mensaje de error en pantalla
-	    	verificar_resultado($validarpreparar);
-	    }
-		//$resultado = mysqli_query($conexion, $query);		
-		//verificar_resultado($resultado);
-		//cerrar($conexion);
-	}
-
-	function existe_usuario($id, $db){
-		$query = "SELECT id FROM usuarios WHERE id = '$id';";
-		$validarpreparar=$db->preparar($query);
-	    if ($validarpreparar==1){
-		    $resultado = $db->ejecutar();
-			verificar_resultado($resultado);
-		    $db->liberar();
-			$db->cerrar();
-	    }
-		//$resultado = mysqli_query($conexion, $query);
-		//$existe_usuario = mysqli_num_rows( $resultado );
-		return $validarpreparar;
-	}
-
-
-	function modificar($id, $nombre, $hobby, $db){
+	function registrar($run,$nombre, $hobby, $db){
 		// Prepara una sentencia SQL con parámetros de signos de interrogación
-		$query= "UPDATE usuarios SET nombre='$nombre',
-						  hobby='$hobby'
-					 WHERE id = ?";
+		$query = "INSERT INTO usuarios VALUES(NULL,?,?,?,1)";
+		$validarpreparar=$db->preparar($query);
+	    	// Vincula variables a una sentencia preparada como parámetros
+	    	$db->prep()->bind_param('sss',$run,$nombre,$hobby);
+		    $resultado = $db->ejecutar();
+			verificar_resultado($resultado);
+		    $db->liberar();
+			$db->cerrar();
+	}
+
+	function modificar($id,$run, $nombre, $hobby, $db){
+		// Prepara una sentencia SQL con parámetros de signos de interrogación
+		$query= "UPDATE usuarios SET run=?, nombre=?, hobby=? WHERE id = ?";
 		// Se valida el resultado de preparación: null o 1 
 	    $validarpreparar=$db->preparar($query);
-
-	    // Si trae datos que ejecute el proceso de adjuntar variables a Query y ejecutarla
-	    if ($validarpreparar==1){
-		    $db->prep()->bind_param('i', $id);
+	    	// Vincula variables a una sentencia preparada como parámetros
+	    	$db->prep()->bind_param('sssi',$id,$nombre,$hobby,$id);
 		    $resultado = $db->ejecutar();
 			verificar_resultado($resultado);
 		    $db->liberar();
 			$db->cerrar();
-	    } 
-	    	else { // No se ejecuta y solo se muestra el mensaje de error en pantalla
-	    	verificar_resultado($validarpreparar);
-	    }
-	}
 
+	}
 
 	function eliminar($id,$db){
 		$query= "UPDATE usuarios SET estado=0 WHERE id = ?";
 		$validarpreparar=$db->preparar($query);
 	    // Si trae datos que ejecute el proceso de adjuntar variables a Query y ejecutarla
 	    if ($validarpreparar==1){
+	    	// Vincula variables a una sentencia preparada como parámetros
 		    $db->prep()->bind_param('i', $id);
 		    $resultado = $db->ejecutar();
 			verificar_resultado($resultado);
@@ -101,15 +85,11 @@
 	    }
 	}
 
+	
 	function verificar_resultado($resultado){
 		if (! $resultado )  $informacion["respuesta"] = "ERROR";
 		else $informacion["respuesta"] = "BIEN";
 		echo json_encode($informacion);
 	}
-
-	/*function cerrar($db){
-		mysql_close($db);
-	}*/
-
 
 ?>

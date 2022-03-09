@@ -43,13 +43,7 @@ class Database{
     /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
 
     public function ejecutar(){
-        // Se ejecuta la query solo si el método preparar es diferente de nulo
-        if(!$this->prep){
-            return null;
-        } 
-        else {
-            return $this->prep->execute();
-        }
+        return $this->prep->execute();  
     }
 
 

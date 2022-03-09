@@ -31,18 +31,18 @@
 					<h3 class="col-sm-offset-2 col-sm-8 text-center">					
 					Formulario de Registro de Usuarios</h3>
 				</div>
-				<input type="text" id="id" name="id" value="0">
-				<input type="text" id="opcion" name="opcion" value="registrar">
+				<input type="hidden" id="id" name="id" value="0">
+				<input type="hidden" id="opcion" name="opcion" value="registrar">
 				<div class="form-group">
 					<label for="nombre" class="col-sm-2 control-label">Run</label>
-					<div class="col-sm-8"><input id="run" name="run" type="text" class="form-control"  autofocus></div>				
+					<div class="col-sm-8"><input id="run" name="run" type="text" class="form-control" autofocus></div>				
 				</div>
 				<div class="form-group">
 					<label for="nombre" class="col-sm-2 control-label">Nombres</label>
-					<div class="col-sm-8"><input id="nombreusuario" name="nombre" type="text" class="form-control"  autofocus></div>				
+					<div class="col-sm-8"><input id="nombreusuario" name="nombre" type="text" class="form-control"  autofocus></div>			
 				</div>
 				<div class="form-group">
-					<label for="apellidos" class="col-sm-2 control-label">Apellidos</label>
+					<label for="apellidos" class="col-sm-2 control-label">Hobby</label>
 					<div class="col-sm-8"><input id="hobby" name="hobby" type="text" class="form-control" ></div>
 				</div>
 				<div class="form-group">
@@ -92,8 +92,8 @@
   <!-- Modal Eliminar usuario -->
 	<div>
 		<form id="frmEliminarUsuario" action="" method="POST">
-			<input type="text" id="id" name="idusuario" value="">
-			<input type="text" id="opcion" name="opcion" value="eliminar">
+			<input type="hidden" id="id" name="idusuario" value="">
+			<input type="hidden" id="opcion" name="opcion" value="eliminar">
 			<!-- Modal -->
 			<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="modalEliminarLabel">
 				<div class="modal-dialog" role="document">

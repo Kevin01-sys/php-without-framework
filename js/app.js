@@ -44,6 +44,7 @@
     		$(tbody).on("click", "button.editar", function(){
     			var data = table.row( $(this).parents("tr") ).data();
     			var idusuario = $("#id").val(data.id),
+    				run = $("#run").val(data.run),
     				nombre = $("#nombreusuario").val(data.nombre),
     				hobby = $("#hobby").val(data.hobby),
     				opcion = $("#opcion").val("modificar");
@@ -127,14 +128,7 @@
 					$(this).fadeIn(3000);
 			});			
 		}
-
-		var limpiar_datos = function(){
-			$("#opcion").val("registrar");
-			$("#idusuario").val("");
-			$("#nombre").val("").focus();
-			$("#apellidos").val("");
-			$("#dni").val("");
-		}
+		
 
 		var agregar_nuevo_usuario = function(){
 			limpiar_datos();
@@ -146,6 +140,7 @@
 		var limpiar_datos = function() {
 		    $("#opcion").val("registrar");
 		    $("#id").val("");
+		    $("#run").val("");
 		    $("#nombreusuario").val("").focus();
 		    $("#hobby").val("");
 		}
