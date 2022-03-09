@@ -1,4 +1,3 @@
-=======
 ### Sobre el programa
 
 - Diseñado bajo el patron de arquitectura MVC
@@ -7,7 +6,6 @@
 - Usuarios para el sistema los cuales tendrán ciertas restricciones segun los permisos que se le otorguen
 - Generar un pdf, excell, word
 
-###Images
 
 Image:
 
