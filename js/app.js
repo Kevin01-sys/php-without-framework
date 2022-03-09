@@ -1,74 +1,93 @@
-       //Al presionar el boton btn_listar, ocurrira la función listar()
+		//Al presionar el boton btn_listar, ocurrira la función listar()
        $("#btn_listar").on("click", function(){
        		console.log("Probando btn listar");
        		listar();
        });
+
+       //Al presionar el boton btn_listar, ocurrira la función listar()
+       $("#agregarUsuario").on("click", function(){
+       		console.log("Probando btn agregar usuario");
+       		agregar_nuevo_usuario();
+       });
+
        //La funcíón listar transforma el table "dt_cliente" en un Datatable y trae los datos del servidor 
-    	var listar = function(){
-    		var table = $("#dt_cliente").DataTable({
-    			"destroy": true,
-    			"ajax":{
-    				"method":"POST",
-    				"url":"controllers/ajax/listarUsuario.php"
-    			},
-    			"columns":[
-    				{"data":"id"},
+		var listar = function(){
+				$("#cuadro2").slideUp("slow");
+				$("#cuadro1").slideDown("slow");
+				//DataTable daba problemas despues de usar el listar, para resolverlo se uso empty.
+				//Sino me traia data is undefined al tratar de traer la fila a una variable o datos duplicados o hasta triplicados y subia cada vez que listaba. 
+				// Se inicializa, se deja vacio, se destruye, y se vuelve a armar. Es el proceso cada vez que se lista.
+			var table = $('#dt_cliente').DataTable();
+			$('#dt_cliente').empty();
+			table.destroy();
+			var table = $("#dt_cliente").DataTable({
+				paging: true,
+				ajax:{
+					"method":"POST",
+					"url": "controllers/ajax/listarUsuario.php"
+				},
+				columns:[
+    				{"data":"run"},
     				{"data":"nombre"},
     				{"data":"hobby"},
-    				{"defaultContent":'<button type="button" id="buttonEditar" class="editar btn btn-primary"><i class="fa fa-pencil-square-o"></i></button> <button type="button" id="buttonEliminar" class="eliminar btn btn-danger" data-toggle="modal" data-target="#modalEliminar"><i class="fa fa-trash-o"></i></button> '},
-    			],
-    			"language": idioma_espanol,
-    		});
+					{"defaultContent": "<button type='button' id='buttonEditar' class='editar btn btn-primary'><i class='fa fa-pencil-square-o'></i></button>	<button type='button'id='buttonEliminar' class='eliminar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash-o'></i></button>"}	
+				],
+				language: idioma_espanol,
+			});
 
-    		obtener_data_editar("#dt_cliente", table);
+			obtener_data_editar("#dt_cliente tbody", table);
+			obtener_id_eliminar("#dt_cliente tbody", table);
+		}
 
-    		obtener_id_eliminar("#dt_cliente", table);
-
-
-    	}
     	//Se obtienen las variables de la fila editar 
     	var obtener_data_editar = function(tbody, table){
-    		$(tbody).on("click", "#buttonEditar", function(){
-    			var data = table.row( $(this).parents("tr")).data();
+    		$(tbody).on("click", "button.editar", function(){
+    			var data = table.row( $(this).parents("tr") ).data();
     			var idusuario = $("#id").val(data.id),
+    				run = $("#run").val(data.run),
     				nombre = $("#nombreusuario").val(data.nombre),
-    				hobby = $("#hobby").val(data.hobby);
+    				hobby = $("#hobby").val(data.hobby),
+    				opcion = $("#opcion").val("modificar");
     			console.log(data);	
+
+				$("#cuadro2").slideDown("slow");
+				$("#cuadro1").slideUp("slow");
     		});
     	}
+
        // Se envian los datos para editar el usuario 
        var guardar = function(){
        		$("#frmEditarUsuario").on("submit", function(e){
        			e.preventDefault();
        			var frm = $(this).serialize();
-       			console.log(frm);
        			$.ajax({
        				method: "POST",
        				url: "controllers/ajax/guardar.php",
        				data: frm
        			}).done(function(info){
-       				console.log(info);
        				var json_info = JSON.parse(info);
        				console.log(json_info);
        				mostrar_mensaje(json_info);
        				limpiar_datos();
+       				listar();
        			});
        		});
        }
+
     	//Se obtienen las variables de la fila a eliminar
     	var obtener_id_eliminar = function(tbody, table){
     		$(tbody).on("click", "#buttonEliminar", function(){
     			var data = table.row( $(this).parents("tr")).data();
-    			var idusuario = $("#frmEliminarUsuario #id").val(data.id);
     			console.log(data);	
+    			var idusuario = $("#frmEliminarUsuario #id").val(data.id);
     		});
     	}
+
     	// Se elimina el usuario al cambiar su estado a 0. 
        var eliminar = function(){
        	$("#eliminar-usuario").on("click",function(){
        		var idusuario = $("#frmEliminarUsuario #id").val(),
        			opcion = $("#frmEliminarUsuario #opcion").val();
-       			console.log(idusuario+opcion);
        			$.ajax({
        				method: "POST",
        				url: "controllers/ajax/guardar.php",
@@ -82,34 +101,46 @@
        			})
        	});
        }
+
 		// Función que se usa para mostrar un mensaje en pantalla
 		var mostrar_mensaje = function( informacion ){
-		var texto = "", color = "";
-		if( informacion.respuesta == "BIEN" ){
-		texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
-		color = "#379911";
-		}else if( informacion.respuesta == "ERROR"){
-		texto = "<strong>Error</strong>, no se ejecutó la consulta.";
-		color = "#C9302C";
-		}else if( informacion.respuesta == "EXISTE" ){
-		texto = "<strong>Información!</strong> el usuario ya existe.";
-		color = "#5b94c5";
-		}else if( informacion.respuesta == "VACIO" ){
-		texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
-		color = "#ddb11d";
-		}
+			var texto = "", color = "";
+			if( informacion.respuesta == "BIEN" ){
+					texto = "<strong>Bien!</strong> Se han guardado los cambios correctamente.";
+					color = "#379911";
+			}else if( informacion.respuesta == "ERROR"){
+					texto = "<strong>Error</strong>, no se ejecutó la consulta.";
+					color = "#C9302C";
+			}else if( informacion.respuesta == "EXISTE" ){
+					texto = "<strong>Información!</strong> el usuario ya existe.";
+					color = "#5b94c5";
+			}else if( informacion.respuesta == "VACIO" ){
+					texto = "<strong>Advertencia!</strong> debe llenar todos los campos solicitados.";
+					color = "#ddb11d";
+			}else if( informacion.respuesta == "OPCION_VACIA" ){
+					texto = "<strong>Advertencia!</strong> la opción no existe o esta vacia, recargar la página.";
+					color = "#ddb11d";
+			}
 
-		$(".mensaje").html( texto ).css({"color": color });
-		$(".mensaje").fadeOut(5000, function(){
-		$(this).html("");
-		$(this).fadeIn(3000);
-		}); 
+			$(".mensaje").html( texto ).css({"color": color });
+			$(".mensaje").fadeOut(5000, function(){
+					$(this).html("");
+					$(this).fadeIn(3000);
+			});			
+		}
+		
+
+		var agregar_nuevo_usuario = function(){
+			limpiar_datos();
+			$("#cuadro2").slideDown("slow");
+			$("#cuadro1").slideUp("slow");
 		}
 
 		//Limpia los campos
 		var limpiar_datos = function() {
 		    $("#opcion").val("registrar");
 		    $("#id").val("");
+		    $("#run").val("");
 		    $("#nombreusuario").val("").focus();
 		    $("#hobby").val("");
 		}

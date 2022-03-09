@@ -118,6 +118,15 @@
 
     <!-- Termino de div listar -->
     <!--<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!-- Librerias que podrían ser para los botones de exportar documentos pero no funcionaron
+    <script src="js/jquery-3.5.1.js"></script>
+    <script src="js/jquery.dataTables.min.js"></script>
+    <script src="js/jszip.min.js"></script>
+    <script src="js/dataTables.buttons.min.js"></script>
+    <script src="js/pdfmake.min.js"></script>
+    <script src="js/vfs_fonts.js"></script>
+    <script src="js/buttons.html5.min.js"></script>-->
+    <!-- Script necesario para el uso del Datatable-->
     <script type="text/javascript" src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="js/app.js"></script>
     <script>

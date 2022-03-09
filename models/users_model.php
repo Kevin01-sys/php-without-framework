@@ -15,14 +15,6 @@ class users_model extends Connect
 		$this->users = array();
 	}
 
-	public function get_users(){
-		$query = $this->db->query("SELECT * FROM usuarios");
-		while ($rows = $query->fetch_assoc()){
-			$this->users[] = $rows;
-		}
-		return $this->users;
-	}
-	
     /*El método "query" es directo de la instancia $db de la clase mysqli, nos permite hacer una consulta directa, la uso en este "validadDatos" para corroborar si el usuario ya existe, enviándole de parametros, la columna que queremos, de que tabla y bajo que condición, es un SELECT sencillo.*/
 
     public function validarDatos($columna, $tabla, $condicion){
@@ -50,13 +42,7 @@ class users_model extends Connect
     /*Dado que "prepare" además de preparar la consulta devuelve un objeto tipo sentencia, es este último quien tiene el método "execute" el cual ejecuta la sentencia en el servidor.*/
 
     public function ejecutar(){
-        // Se ejecuta la query solo si el método preparar es diferente de nulo
-        if(!$this->prep){
-            return null;
-        } 
-        else {
-            return $this->prep->execute();
-        }
+        return $this->prep->execute();  
     }
 
 
