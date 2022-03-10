@@ -60,7 +60,7 @@
 		// Se valida el resultado de preparación: null o 1 
 	    $validarpreparar=$db->preparar($query);
 	    	// Vincula variables a una sentencia preparada como parámetros
-	    	$db->prep()->bind_param('sssi',$id,$nombre,$hobby,$id);
+	    	$db->prep()->bind_param('sssi',$run,$nombre,$hobby,$id);
 		    $resultado = $db->ejecutar();
 			verificar_resultado($resultado);
 		    $db->liberar();
