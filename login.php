@@ -1,7 +1,11 @@
 <?php
- 
 include('config.php');
 session_start();
+// Por ejemplo, si quisiéramos redireccionar a una página dentro de la ruta actual, independientemente de cuál sea la ruta:
+$host = $_SERVER['HTTP_HOST'];
+$ruta = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+$html = 'index.php';
+$url = "http://$host$ruta/$html";
  
 if (isset($_POST['login'])) {
  
@@ -21,8 +25,13 @@ if (isset($_POST['login'])) {
             $_SESSION['user_id'] = $result['id'];
             $_SESSION['username'] = $result['username'];
             $_SESSION['user_email'] = $result['email'];
-            echo '<p class="success">Congratulations, you are logged in!</p>';
-            header('Location: index.php');
+            //echo '<p class="success">Congratulations, you are logged in!</p>';
+            //header("Location: $url");
+            include 'redirect.php';
+            // En caso de que no funcione el redireccionamiento automático.
+            echo "El recurso se ha movido hacia <a href=\"$url\">aquí</a>.";
+            //echo "El recurso se ha movido hacia <a href='index.php'>aquí</a>.";
+            die();
         } else {
             echo '<p class="error">Username password combination is wrong!</p>';
         }
