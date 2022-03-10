@@ -19,6 +19,8 @@ if (isset($_POST['login'])) {
     } else {
         if (password_verify($password, $result['password'])) {
             $_SESSION['user_id'] = $result['id'];
+            $_SESSION['username'] = $result['username'];
+            $_SESSION['user_email'] = $result['email'];
             echo '<p class="success">Congratulations, you are logged in!</p>';
             header('Location: index.php');
         } else {
