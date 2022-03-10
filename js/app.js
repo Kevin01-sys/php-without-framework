@@ -21,7 +21,7 @@
 			$('#dt_cliente').empty();
 			table.destroy();
 			var table = $("#dt_cliente").DataTable({
-				paging: false,
+				paging: true,
 				ajax:{
 					"method":"POST",
 					"url": "listarUsuario.php"
